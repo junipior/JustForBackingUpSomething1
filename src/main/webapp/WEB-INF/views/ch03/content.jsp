@@ -14,7 +14,7 @@
 				
 			</div>
 			<div class="card-body">
-					ch02/content.jsp
+					ch03/content.jsp
 			</div>
 		</div>
 	</body>

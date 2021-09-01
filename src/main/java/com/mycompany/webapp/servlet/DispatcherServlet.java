@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mycompany.webapp.servlet.controller.Ch01Controller;
-import com.mycompany.webapp.servlet.controller.Ch02Controller;
+import com.mycompany.webapp.controller.Ch01Controller;
+import com.mycompany.webapp.controller.Ch02Controller;
+import com.mycompany.webapp.controller.Ch03Controller;
 
 public class DispatcherServlet extends HttpServlet {
 
@@ -35,13 +36,16 @@ public class DispatcherServlet extends HttpServlet {
 		String requestUri = request.getRequestURI();
 		if(requestUri.startsWith("/ch01")) {
 			Ch01Controller ctrl = new Ch01Controller();
-			viewName = ctrl.exec();
+			viewName = ctrl.exec(request, response);
 		} else if(requestUri.startsWith("/ch02")) {
 			Ch02Controller ctrl = new Ch02Controller();
-			viewName = ctrl.exec();
+			viewName = ctrl.exec(request, response);
+		} else if(requestUri.startsWith("/ch03")) {
+			Ch03Controller ctrl = new Ch03Controller();
+			viewName = ctrl.exec(request, response);
 		}
 		
-		//뷰 이름을 해석해서 리다이렉트할건지 포워드할건지를 결정
+		//뷰 이름을 해석해서 리다이렉트할건지 포워드할건지를 결정 (ViewResolver)
 		if(viewName.startsWith("redirect:")) {
 			//리다이렉트
 			String uri = viewName.split(":")[1];
